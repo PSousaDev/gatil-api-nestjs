@@ -1,0 +1,12 @@
+model permission {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  resources   String?
+  action      String?
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  roles       rolePermission[]
+
+  @@map("permission")
+}

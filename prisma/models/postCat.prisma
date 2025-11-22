@@ -1,0 +1,11 @@
+model postCat {
+  id        String     @id @default(cuid())
+  postId    String     @map("post_id")
+  catId     String     @map("cat_id")
+  createdAt DateTime   @default(now()) @map("created_at")
+  cat       cat        @relation(fields: [catId], references: [id], onDelete: Cascade)
+  post      socialPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, catId])
+  @@map("post_cat")
+}

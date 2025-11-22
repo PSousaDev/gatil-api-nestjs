@@ -1,0 +1,24 @@
+model adopter {
+  id                String     @id @default(cuid())
+  userId            String?    @map("user_id")
+  adapterId         String?    @map("adapter_id")
+  firstName         String     @map("first_name")
+  lastName          String     @map("last_name")
+  email             String     @unique
+  phonePrimary      String     @map("phone_primary")
+  city              String?
+  state             String?
+  bio               String?
+  cpf               String?    @unique
+  createdAt         DateTime   @default(now()) @map("created_at")
+  updatedAt         DateTime   @updatedAt @map("updated_at")
+  verificationDate  DateTime?  @map("verification_date")
+  adoptionAgreement Boolean    @default(false) @map("adoption_agreement")
+  adoptionReturned  Boolean    @default(false) @map("adoption_returned")
+  address           String?
+  phone2            String?    @map("phone_2")
+  user              user?      @relation(fields: [userId], references: [id])
+  adoptions         adoption[]
+
+  @@map("adopter")
+}

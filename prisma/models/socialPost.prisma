@@ -1,0 +1,33 @@
+enum POST_STATUS {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+  FAILED
+}
+
+model socialPost {
+  id             String      @id @default(cuid())
+  userId         String?     @map("user_id")
+  title          String      @db.VarChar(500)
+  platform       String      @db.VarChar(100)
+  content        String?
+  hashtags       String?
+  scheduledDate  DateTime?   @map("scheduled_date")
+  publishedDate  DateTime?   @map("published_date")
+  status         POST_STATUS @default(DRAFT)
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+  internalPostId String?     @map("internal_post_id")
+  externalPostId String?     @map("external_post_id")
+  isFeatured     Boolean     @default(false) @map("is_featured")
+  viewCount      Int         @default(0) @map("view_count")
+  likes          Int         @default(0)
+  comments       Int         @default(0)
+  shares         Int         @default(0)
+  engagementRate Decimal?    @map("engagement_rate") @db.Decimal(5, 2)
+  cats           postCat[]
+  media          postMedia[]
+  user           user?       @relation("user_posts", fields: [userId], references: [id])
+
+  @@map("social_post")
+}

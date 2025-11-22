@@ -1,0 +1,20 @@
+model medicalRecord {
+  id              String    @id @default(cuid())
+  catId           String    @map("cat_id")
+  userId          String?   @map("user_id")
+  recordDate      DateTime  @default(now()) @map("record_date")
+  recordType      String    @map("record_type")
+  diagnosis       String?
+  treatment       String?
+  notes           String?
+  nextAppointment DateTime? @map("next_appointment")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  medication      String?
+  dosage          String?
+  duration        String?
+  cat             cat       @relation(fields: [catId], references: [id], onDelete: Cascade)
+  user            user?     @relation("user_medical_records", fields: [userId], references: [id])
+
+  @@map("medical_record")
+}

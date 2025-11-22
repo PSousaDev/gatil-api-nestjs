@@ -1,0 +1,23 @@
+enum EventType {
+  VACCINATION
+  CHECKUP
+  SURGERY
+  ADOPTION
+  GROOMING
+  OTHER
+  DEATH
+}
+
+model catEvent {
+  id          String    @id @default(cuid())
+  catId       String    @map("cat_id")
+  eventType   EventType @map("event_type")
+  title       String?
+  description String?
+  eventDate   DateTime  @default(now()) @map("event_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  cat         cat       @relation(fields: [catId], references: [id], onDelete: Cascade)
+
+  @@map("cat_event")
+}

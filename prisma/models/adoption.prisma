@@ -1,0 +1,18 @@
+model adoption {
+  id           String    @id @default(cuid())
+  catId        String    @map("cat_id")
+  adopterId    String    @map("adopter_id")
+  adoptionDate DateTime  @map("adoption_date")
+  returnDate   DateTime? @map("return_date")
+  returnReason String?   @map("return_reason")
+  isReturned   Boolean   @default(false) @map("is_returned")
+  notes        String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  adoptionType String    @default("standard") @map("adoption_type")
+  fee          Decimal?  @db.Decimal(10, 2)
+  adopter      adopter   @relation(fields: [adopterId], references: [id], onDelete: Cascade)
+  cat          cat       @relation(fields: [catId], references: [id], onDelete: Cascade)
+
+  @@map("adoption")
+}

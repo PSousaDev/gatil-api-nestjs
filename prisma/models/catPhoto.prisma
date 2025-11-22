@@ -1,0 +1,16 @@
+model catPhoto {
+  id             String   @id @default(cuid())
+  catId          String   @map("cat_id")
+  filePath       String   @map("file_path")
+  fileName       String   @map("file_name")
+  fileSize       Int      @map("file_size")
+  uploadedBy     String?  @map("uploaded_by")
+  uploadedAt     DateTime @default(now()) @map("uploaded_at")
+  isPrimary      Boolean  @default(false) @map("is_primary")
+  mimeType       String   @map("mime_type")
+  description    String?
+  cat            cat      @relation(fields: [catId], references: [id], onDelete: Cascade)
+  uploadedByUser user?    @relation("user_photos", fields: [uploadedBy], references: [id])
+
+  @@map("cat_photo")
+}

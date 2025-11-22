@@ -1,0 +1,19 @@
+model user {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  firstName      String
+  lastName       String
+  passwordHash   String          @map("password_hash")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  bio            String?
+  verifiedBy     String?         @map("verified_by")
+  isActive       Boolean         @default(true) @map("is_active")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  posts          socialPost[]    @relation("user_posts")
+  roles          userRole[]
+  medicalRecords medicalRecord[] @relation("user_medical_records")
+  catPhotos      catPhoto[]      @relation("user_photos")
+  adopters       adopter[]
+
+  @@map("user")
+}

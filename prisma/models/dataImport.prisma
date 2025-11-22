@@ -1,0 +1,24 @@
+enum dataImportStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+model dataImport {
+  id                String           @id @default(cuid())
+  fileName          String           @map("file_name")
+  filePath          String           @map("file_path")
+  fileSize          Int              @map("file_size")
+  importType        String           @map("import_type")
+  status            dataImportStatus @default(PENDING)
+  totalRecords      Int              @default(0) @map("total_records")
+  successfulRecords Int              @default(0) @map("successful_records")
+  failedRecords     Int              @default(0) @map("failed_records")
+  errorLog          String?          @map("error_log")
+  createdAt         DateTime         @default(now()) @map("created_at")
+  updatedAt         DateTime         @updatedAt @map("updated_at")
+  completedAt       DateTime?        @map("completed_at")
+
+  @@map("data_import")
+}

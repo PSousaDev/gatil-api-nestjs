@@ -1,0 +1,37 @@
+enum Temperament {
+  FRIENDLY
+  SHY
+  PLAYFUL
+  AGGRESSIVE
+  CURIOUS
+}
+
+model cat {
+  id                String          @id @default(cuid())
+  name              String
+  family            String?
+  carriage          String?
+  color             String?
+  gender            String?
+  estimatedAge      DateTime?       @map("estimated_age")
+  entryDate         DateTime?       @map("entry_date")
+  microchipId       String?         @map("microchip_id")
+  microchipDate     DateTime?       @map("microchip_date")
+  vaccinationStatus String?         @map("vaccination_status")
+  weight            Decimal?        @db.Decimal(5, 2)
+  status            String?
+  isNeutered        Boolean         @default(false) @map("is_neutered")
+  isAvailable       Boolean         @default(true) @map("is_available")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  description       String?
+  specialNeeds      String?         @map("special_needs")
+  temperament       Temperament
+  adoptions         adoption[]
+  events            catEvent[]
+  photos            catPhoto[]
+  medicalRecords    medicalRecord[]
+  posts             postCat[]
+
+  @@map("cat")
+}

@@ -1,0 +1,17 @@
+model postMedia {
+  id           String     @id @default(cuid())
+  postId       String     @map("post_id")
+  mediaType    String     @map("media_type")
+  fileKey      String     @map("file_key")
+  fileName     String     @map("file_name")
+  fileSize     Int        @map("file_size")
+  mimeType     String     @map("mime_type")
+  order        Int        @default(0)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+  alt          String?
+  displayOrder Int        @default(0) @map("display_order")
+  post         socialPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("post_media")
+}
