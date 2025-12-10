@@ -1,4 +1,4 @@
-enum dataImportStatus {
+enum data_import_status {
   PENDING
   IN_PROGRESS
   COMPLETED
@@ -11,7 +11,7 @@ model dataImport {
   filePath          String           @map("file_path")
   fileSize          Int              @map("file_size")
   importType        String           @map("import_type")
-  status            dataImportStatus @default(PENDING)
+  status            data_import_status @default(PENDING)
   totalRecords      Int              @default(0) @map("total_records")
   successfulRecords Int              @default(0) @map("successful_records")
   failedRecords     Int              @default(0) @map("failed_records")

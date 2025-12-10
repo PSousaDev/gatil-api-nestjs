@@ -1,4 +1,4 @@
-enum Temperament {
+enum temperament {
   FRIENDLY
   SHY
   PLAYFUL
@@ -26,7 +26,7 @@ model cat {
   updatedAt         DateTime        @updatedAt @map("updated_at")
   description       String?
   specialNeeds      String?         @map("special_needs")
-  temperament       Temperament
+  temperament       temperament
   adoptions         adoption[]
   events            catEvent[]
   photos            catPhoto[]

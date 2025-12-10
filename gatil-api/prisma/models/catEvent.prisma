@@ -1,4 +1,4 @@
-enum EventType {
+enum event_type {
   VACCINATION
   CHECKUP
   SURGERY
@@ -11,7 +11,7 @@ enum EventType {
 model catEvent {
   id          String    @id @default(cuid())
   catId       String    @map("cat_id")
-  eventType   EventType @map("event_type")
+  eventType   event_type @map("event_type")
   title       String?
   description String?
   eventDate   DateTime  @default(now()) @map("event_date")
